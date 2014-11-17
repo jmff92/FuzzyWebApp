@@ -1,3 +1,3 @@
 == README
 
-Aplicación web para mostrar el funcionamiento de la implementación de tipos de datos difusos II.
+Aplicación web para mostrar el funcionamiento de la implementación de datos difusos de tipo II.
