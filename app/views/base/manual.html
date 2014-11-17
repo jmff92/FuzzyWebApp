@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+		<script type="text/javascript" src="js/fuzzy.js"></script>
+		<script src="js/jquery-2.1.1.min.js"></script>
+	</head>
+	<body>
+
+		<div class="header">
+			<div class="brand">
+				<img src="img/logo_mascota.png" height="70px">
+			</div>
+			<div class="menu">
+				<ul>
+				  <li><a href="home.html">FuzzyDB</a></li>
+				  <li><a href="manual.html">Manual</a></li>
+				  <li>
+				  	<a href="ordenamientos.html">
+				  		<span> Ordenamientos<span> 
+				  		<span class="label label-warning">New</span>
+				  	</a>
+				  </li> 
+				  <li>
+				  	<a href="consola.html">
+				  		<span> Constantes<span> 
+				  		<span class="label label-warning">New</span>
+				  	</a>
+				  </li>
+				</ul>
+			</div>
+		</div>
+		<div class="blue-band"></div>
+		<div class="content">
+			<h1>Manual de usuario</h1>
+			<h3>Creación del dominio</h3>
+			<p> 
+				Antes que nada es importante especificar el dominio sobre el cual se manejarán
+				los datos difusos de Tipo II. La instrucción para crear el dominio es la siguiente.
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					CREATE FUZZY DOMAIN 'dominio' <br>
+					AS POSSIBILITY DISTRIBUTION ON INTEGER;
+				</p>
+			  </div>
+			</div>
+			<h3>Inserción de datos</h3>
+			<p>
+				Una vez que el dominio está creado, se pueden crear tablas que utilicen estos
+				nuevos atributos, como por ejemplo:
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					CREATE TABLE 'tabla'( <br>
+					&nbsp;&nbsp;&nbsp;att_1 type, <br>
+					&nbsp;&nbsp;&nbsp;...<br>
+					&nbsp;&nbsp;&nbsp;fuzzy_att 'dominio'<br>
+				);
+				</p>
+			  </div>
+			</div>
+			<p>
+				Y se pueden insertar elementos difusos en estas tablas: números difusos
+				por extensión o trapezoidales, como por ejemplo:
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					INSERT INTO 'tabla' ('fuzzy_att') VALUES ({f 0.5/1, 1.0/2, 0.8/3, 0.5/4});<br>
+					INSERT INTO 'tabla' ('fuzzy_att') VALUES ({f (1, 9, 11, 13)});
+				</p>
+			  </div>
+			</div>
+			<h3>Consulta de datos</h3>
+			<p>
+				Los datos en FuzzyDB puede consultarse con normalidad por ejempo ejecutando
+				esta simple sentencia SELECT:
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					SELECT 'atributos' <br>
+					FROM 'tabla' <br>
+					WNERE 'condiciones';
+				</p>
+			  </div>
+			</div>
+			<h4>Ordenamiento de datos <span class="label label-warning">New</span> </h4>
+			<p>
+				Ahora se puede decidir por cuál ordenamiento se desea ordenar. Existen tres ordenamientos: 
+				el que se basa en la integral de Sugeno cuya sintaxis es:
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					SELECT 'atributos' <br>
+					FROM 'tabla' <br>
+					WNERE 'condiciones' <br>
+					ORDER BY 'fuzzy_att' USING SUGENO;
+				</p>
+			  </div>
+			</div>
+			<p>
+				el que se basa en la integral de Choquet cuya sintaxis es:
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					SELECT 'atributos' <br>
+					FROM 'tabla' <br>
+					WNERE 'condiciones' <br>
+					ORDER BY 'fuzzy_att' USING CHOQUET;
+				</p>
+			  </div>
+			</div>
+			<p>
+				y el que se basa en el centroide y en la integral de Riemman cuya sintaxis es:
+			</p>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					SELECT 'atributos' <br>
+					FROM 'tabla' <br>
+					WNERE 'condiciones' <br>
+					ORDER BY 'fuzzy_att' USING CENTROID;
+				</p>
+			  </div>
+			</div>
+			<h3>Constantes <span class="label label-warning">New</span></h3>
+			<p>
+				También permitimos la creación de constantes de Tipo II en donde, en lugar de
+				insertar varias veces el número difuso, se puede definir una constante e insertar
+				la constante.
+			</p>
+			<h4>Creación de constantes</h4>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					CREATE FUZZY CONSTANT 'constante' 'dominio' := {f (50, 55, 60, 65)};
+				</p>
+			  </div>
+			</div>
+			<h4>Inserción</h4>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					INSERT INTO 'tabla' ('fuzzy_att') VALUES ('constante');
+				</p>
+			  </div>
+			</div>
+			<h4>Actualización</h4>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					UPDATE 'tabla' <br> 
+					SET 'fuzzy_att' = 'constante'<br> 
+					WHERE 'condiciones';
+				</p>
+			  </div>
+			</div>
+			<h4>Aliasing</h4>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					CREATE FUZZY CONSTANT 'constante2' 'dominio' := 'constante';
+				</p>
+			  </div>
+			</div>
+			<h4>Consulta de datos</h4>
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			    <p class="console small">
+					SELECT 'atributos' <br>
+					FROM 'tabla' <br>
+					WNERE 'fuzzy_at' [>, >=, <>, <=, <] 'constante';
+				</p>
+			  </div>
+			</div>
+		</div>
+		<footer>
+			<table align="center">
+				<tr>
+					<td align="center" style="padding-bottom: 10px;">
+						<img src="img/cebolla.gif" height="40px;">
+					</td>
+					<td style="padding-left: 10px;">
+						<p>
+							<strong>FuzzyDB</strong> <br>
+							Desarrollo de la extensión de datos difusos Tipo II <br>
+							Proyecto desarrollado por: Stephanie Alibrandi, José Delgado y José Figueredo.
+						</p>
+					</td>
+				</tr>
+			</table>
+		</footer>
+	</body>
+</html>
