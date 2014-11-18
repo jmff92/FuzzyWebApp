@@ -1,100 +1,156 @@
 <!DOCTYPE html>
-		<div class="content">
-			<h1>Constantes</h1>
-			<p>
-				Aquí podrás crear constantes difusas!
-			</p>
-			<div style="margin-top: 20px;">
-				<table style="margin: auto;">
+<div class="content">
+	<h1>Constantes</h1>
+	<p>
+		Aquí podrás crear constantes difusas!
+	</p>
+	<div style="margin-top: 20px;">
+		<table style="margin: auto;">
+			<tbody>
+				<tr>
+					<td style="padding: 15px 15px 15px 15px;">
+						<label style="margin: auto;">
+							Nombre:
+						</label>
+					</td>
+					<td style="padding: 15px 15px 15px 15px;" colspan="2">
+						<input type="text" class="form-control" style="width: 100%;">
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 0 15px 0 15px;">
+						<strong>Tipo:</strong>
+					</td>
+					<td style="padding: 0 15px 0 15px;">
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="trapezoide" onclick="trapezoid()" checked>
+						Trapezoidal
+					</td>
+					<td style="padding: 0 15px 0 15px;">
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="extension" onclick="byExtension()">
+						Por extensión
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="trapezoid">
+		<div style="width: 100%; height: 60px;">
+			<form class="form-group" role="form">
+				<div class="col-xs-2" style="width: 100%;">
+					<table style="margin: auto; margin-bottom: 30px;">
+						<tbody>
+							<tr>
+								<td>
+									<input type="text" class="form-control trapezoid-element" placeholder="x1" id="x1" onchange="changeTrapezoid(1)">
+								</td>
+								<td>
+									<input type="text" class="form-control trapezoid-element" placeholder="x2" id="x2" onchange="changeTrapezoid(2)">
+								</td>
+								<td>
+									<input type="text" class="form-control trapezoid-element" placeholder="x3" id="x3" onchange="changeTrapezoid(3)">
+								</td>
+								<td>
+									<input type="text" class="form-control trapezoid-element" placeholder="x4" id="x4" onchange="changeTrapezoid(4)">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(draw_trapezoid);
+		function draw_trapezoid() {
+			var data = google.visualization.arrayToDataTable(trapezoid_images);
+
+			var options = {
+				'width':400,
+				'height':80,
+				'legend': 'none',
+				'margin': 'auto',
+				hAxis: { ticks: trapezoid_ticks}
+			};
+
+			var chart = new google.visualization.LineChart(document.getElementById('grafico-trapecio'));
+
+			chart.draw(data, options);
+		}
+		</script>
+		<div id="grafico-trapecio" style="margin-left: 200px; margin-right:200px;"></div>
+	</div>
+	<div id="by-extension" style="display: none;">
+		<form class="form-group" role="form">
+			<div class="col-xs-2" style="width: 100%; padding-left: 0px;">
+				<table id="extension-elements">
 					<tbody>
 						<tr>
-							<td style="padding: 0 15px 0 15px;">
-								<label>
-							    	<input type="radio" name="optionsRadios" id="optionsRadios1" value="trapezoide" onclick="trapezoid()" checked>
-							    	Trapezoidal
-							  	</label>
+							<td style="padding-bottom: 20px;">
+								<p>
+									<strong>valor:</strong>
+								</p>
+								<p>
+									<strong>grado:</strong>
+								</p>
 							</td>
-							<td style="padding: 0 15px 0 15px;">
-								<label>
-							    	<input type="radio" name="optionsRadios" id="optionsRadios1" value="extension" onclick="byExtension()">
-							    	Por extensión
-							  	</label>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="trapezoid">
-				<form class="form-group" role="form">
-	  				<div class="col-xs-2" style="width: 100%;">
-						<table style="margin: auto; margin-bottom: 30px;">
-							<tbody>
-								<tr>
-									<td>
-		    							<input type="text" class="form-control trapezoid-element" placeholder="x1">
-									</td>
-									<td>
-		    							<input type="text" class="form-control trapezoid-element" placeholder="x2">
-									</td>
-									<td>
-		    							<input type="text" class="form-control trapezoid-element" placeholder="x3">
-									</td>
-									<td>
-		    							<input type="text" class="form-control trapezoid-element" placeholder="x4">
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</form>
-			</div>
-			<div id="by-extension" style="display: none;">
-				<form class="form-group" role="form">
-					<div class="col-xs-2" style="width: 100%;">
-						<table id="extension-elements">
-							<tbody>
-								<tr>
-									<td id="extension_1">
-		    							<input type="text" class="form-control by-extension-element" placeholder="x">
-		    							<input type="text" class="form-control by-extension-element" placeholder="y">
-		    							<button type="button" class="btn btn-default btn-xs" style="width: 40px;" onclick="removeByExtension('1')">
-											<span class="glyphicon glyphicon-trash"></span>
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</form>
-				<table style="margin:auto; margin-bottom: 30px;">
-					<tbody>
-						<tr>
-							<td>
-								Agrega otro punto
-								<button type="button" class="btn btn-success btn-xs" onclick="addByExtension()">
-									<span class="glyphicon glyphicon-plus white"></span>
+							<td id="extension_1">
+								<input type="text" class="form-control by-extension-element" placeholder="v" id="v1" onchange="changeByExtension(1)">
+								<input type="text" class="form-control by-extension-element" placeholder="g" id="p1" onchange="changeByExtension(1)">
+								<button type="button" class="btn btn-default btn-xs" style="width: 40px;" onclick="removeByExtension('1')">
+									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<table style="margin:auto;">
-				<tbody>
-					<tr>
-						<td style="padding: 5px;">
-							<button type="button" class="btn btn-info">
-								Crear constante
-							</button>
-						</td>
-						<td style="padding: 5px;">
-							<button type="button" class="btn btn-primary">
-								Listar constantes
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</body>
+		</form>
+		<table style="margin:auto; margin-bottom: 30px;">
+			<tbody>
+				<tr>
+					<td>
+						Agrega otro punto
+						<button type="button" class="btn btn-success btn-xs" onclick="addByExtension()">
+							<span class="glyphicon glyphicon-plus white"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(draw_extension);
+		function draw_extension() {
+			var data = google.visualization.arrayToDataTable(extension_images);
+
+			var options = {
+				legend: 'none',
+				hAxis: {ticks: extension_ticks}
+			};
+
+			var chart = new google.visualization.ScatterChart(document.getElementById('grafico-extension'));
+
+			chart.draw(data, options);
+		}
+		</script>
+		<div id="grafico-extension" style="margin-left: 200px; margin-right:200px;"></div>
+	</div>
+	<table style="margin:auto;">
+		<tbody>
+			<tr>
+				<td style="padding: 5px;">
+					<button type="button" class="btn btn-info">
+						Crear constante
+					</button>
+				</td>
+				<td style="padding: 5px;">
+					<button type="button" class="btn btn-primary">
+						Listar constantes
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
 </html>
