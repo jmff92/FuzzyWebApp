@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+		<div class="content">
+			<h1>Constantes</h1>
+			<p>
+				Aquí podrás crear constantes difusas!
+			</p>
+			<div style="margin-top: 20px;">
+				<table style="margin: auto;">
+					<tbody>
+						<tr>
+							<td style="padding: 0 15px 0 15px;">
+								<label>
+							    	<input type="radio" name="optionsRadios" id="optionsRadios1" value="trapezoide" onclick="trapezoid()" checked>
+							    	Trapezoidal
+							  	</label>
+							</td>
+							<td style="padding: 0 15px 0 15px;">
+								<label>
+							    	<input type="radio" name="optionsRadios" id="optionsRadios1" value="extension" onclick="byExtension()">
+							    	Por extensión
+							  	</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="trapezoid">
+				<form class="form-group" role="form">
+	  				<div class="col-xs-2" style="width: 100%;">
+						<table style="margin: auto; margin-bottom: 30px;">
+							<tbody>
+								<tr>
+									<td>
+		    							<input type="text" class="form-control trapezoid-element" placeholder="x1">
+									</td>
+									<td>
+		    							<input type="text" class="form-control trapezoid-element" placeholder="x2">
+									</td>
+									<td>
+		    							<input type="text" class="form-control trapezoid-element" placeholder="x3">
+									</td>
+									<td>
+		    							<input type="text" class="form-control trapezoid-element" placeholder="x4">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+			<div id="by-extension" style="display: none;">
+				<form class="form-group" role="form">
+					<div class="col-xs-2" style="width: 100%;">
+						<table id="extension-elements">
+							<tbody>
+								<tr>
+									<td id="extension_1">
+		    							<input type="text" class="form-control by-extension-element" placeholder="x">
+		    							<input type="text" class="form-control by-extension-element" placeholder="y">
+		    							<button type="button" class="btn btn-default btn-xs" style="width: 40px;" onclick="removeByExtension('1')">
+											<span class="glyphicon glyphicon-trash"></span>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+				<table style="margin:auto; margin-bottom: 30px;">
+					<tbody>
+						<tr>
+							<td>
+								Agrega otro punto
+								<button type="button" class="btn btn-success btn-xs" onclick="addByExtension()">
+									<span class="glyphicon glyphicon-plus white"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<table style="margin:auto;">
+				<tbody>
+					<tr>
+						<td style="padding: 5px;">
+							<button type="button" class="btn btn-info">
+								Crear constante
+							</button>
+						</td>
+						<td style="padding: 5px;">
+							<button type="button" class="btn btn-primary">
+								Listar constantes
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

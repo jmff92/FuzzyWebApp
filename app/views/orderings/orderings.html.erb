@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<div class="content">
+	<h1>Ordenamientos</h1>
+	<h2> Ejecutando el ordenamiento </h2>
+	<p>
+		En esta sección podrás ejecutar los diferentes ordenamientos existentes en FuzzyDB: el ordenamiento basado en la
+		<strong>Integral de Sugeno</strong>, el ordenamiento basado en la <strong>integral de Choquet</strong> y el ordenamiento basado en 
+		el <strong>Centroide y la integral de Riemman</strong>.
+		Sencillamente selecciona según cuál ordenamiento deseas ordenar!
+	</p>
+	<div class="panel panel-default" style="margin-left: 25px; margin-right: 25px;">
+		<div class="panel-body">
+			<form class="form-inline" role="form">
+				<p class="console">
+					SELECT 
+					<select class="form-control">
+						<option>att1</option>
+						<option>att1, att2</option>
+					</select>
+				</p>
+				<p class="console">
+					FROM pokemon 
+				</p> 
+				<p class="console">
+					ORDER BY poder 
+					<select class="form-control">
+						<option>ASC</option>
+						<option>DESC</option>
+					</select>
+					USING
+					<select class="form-control">
+						<option>SUGENO</option>
+						<option>CHOQUET</option>
+						<option>CENTROID</option>
+					</select>
+					<button type="submit" class="btn btn-success">Ejecutar Query</button>
+				</p>
+			</form>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<h2> Resultados </h2>
+		<thead>
+			<tr>
+				<th>
+					att1
+				</th>
+				<th>
+					att2
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>valor1.1</td>
+				<td>valor1.2</td>
+			</tr>
+			<tr>
+				<td>valor2.1</td>
+				<td>valor2.2</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

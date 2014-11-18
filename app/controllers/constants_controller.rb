@@ -1,0 +1,2 @@
+class ConstantsController < ApplicationController
+end
