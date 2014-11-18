@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webapp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<title>FuzzydoDB Tipo 4</title>
+	<meta charset="UTF-8">
+	<%= stylesheet_link_tag 'bootstrap.css' %>
+	<%= stylesheet_link_tag 'style.css' %>
+	<%= javascript_include_tag 'fuzzy.js' %>
+	<%= javascript_include_tag 'jquery-2.1.1.min.js' %>
 </head>
 <body>
+	<div class="blue-band"></div>
+	<div class="header">
+		<div class="brand">
+			<%= image_tag("logo_mascota.png", height: "70") %>
+		</div>
+		<div class="menu">
+			<ul>
+				<li><%= link_to "FuzzyDB", root_path %></li>				  
+				<li><%= link_to "Manual", manual_path %></li>
+				<li><%= link_to "Ordenamientos", ordering_path %> <span class="label label-warning">New</span> </li>			
+				<li><%= link_to "Constants", constants_path %> <span class="label label-warning">New</span> </li>
+			</ul>
+		</div>
+	</div>
 
-<%= yield %>
+
+	<%= yield %>
+
+
+	<footer>
+		<table align="center">
+			<tr>
+				<td align="center" style="padding-bottom: 10px;">
+					<%= image_tag("cebolla.gif", height: "40") %>			
+				</td>
+				<td style="padding-left: 10px;">
+					<p>
+						<strong>FuzzyDB</strong> <br>
+						Desarrollo de la extensión de datos difusos Tipo II <br>
+						Proyecto desarrollado por: Stephanie Alibrandi, José Delgado y José Figueredo.
+					</p>
+				</td>
+			</tr>
+		</table>
+	</footer>
 
 </body>
 </html>

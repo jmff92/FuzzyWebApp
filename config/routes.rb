@@ -55,5 +55,6 @@ Rails.application.routes.draw do
   #   end
 
   get 'manual' => 'statics#manual', :as => 'manual'
-
+  get 'ordering' => 'orderings#orderings', :as => 'ordering'
+  get 'constants' => 'constants#constants', :as => 'constants'
 end
