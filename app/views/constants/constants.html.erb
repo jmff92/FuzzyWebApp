@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+
+	<%= javascript_include_tag 'fuzzy.js' %>
+	<%= javascript_include_tag 'google-charts.js' %>	
+
 <div class="content">
 	<h1>Constantes</h1>
 	<p>
@@ -58,7 +62,7 @@
 				</div>
 			</form>
 		</div>
-		<script type="text/javascript">
+<%= javascript_tag do %>
 		google.load("visualization", "1", {packages:["corechart"]});
 		google.setOnLoadCallback(draw_trapezoid);
 		function draw_trapezoid() {
@@ -76,7 +80,7 @@
 
 			chart.draw(data, options);
 		}
-		</script>
+<% end -%>
 		<div id="grafico-trapecio" style="margin-left: 200px; margin-right:200px;"></div>
 	</div>
 	<div id="by-extension" style="display: none;">
@@ -117,12 +121,12 @@
 				</tr>
 			</tbody>
 		</table>
-		<script type="text/javascript">
+<%= javascript_tag do %>
 		google.load("visualization", "1", {packages:["corechart"]});
 		google.setOnLoadCallback(draw_extension);
+
 		function draw_extension() {
 			var data = google.visualization.arrayToDataTable(extension_images);
-
 			var options = {
 				legend: 'none',
 				hAxis: {ticks: extension_ticks}
@@ -132,7 +136,7 @@
 
 			chart.draw(data, options);
 		}
-		</script>
+<% end -%>
 		<div id="grafico-extension" style="margin-left: 200px; margin-right:200px;"></div>
 	</div>
 	<table style="margin:auto;">
@@ -148,9 +152,34 @@
 						Listar constantes
 					</button>
 				</td>
+				<td style="padding: 5px;">
+					<button type="button" class="btn btn-primary">
+						Ordenar constantes
+					</button>
+				</td>				
 			</tr>
 		</tbody>
 	</table>
+
+	<table class="table table-hover">                         
+		<thead>		
+			<tr>                          
+				<th>Nombre</th>
+				<th>Valor</th>
+			</tr>
+		</thead>
+		<tbody>				
+			<% @cons.each do |row| %>
+			<tr>
+				<td><%= row.fetch("constant_name") %></td>
+				<td><%= row.fetch("value") %></td>
+			</tr>
+			<% end %> 
+		</tbody>		
+	</table>  
+
+
+
+
 </div>
-</body>
-</html>
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>FuzzydoDB Tipo 4</title>
+	<title>fuzzydoDB - Tipo 2</title>
 	<meta charset="UTF-8">
 	<%= stylesheet_link_tag 'bootstrap.css' %>
 	<%= stylesheet_link_tag 'style.css' %>
@@ -17,10 +17,18 @@
 		</div>
 		<div class="menu">
 			<ul>
-				<li><%= link_to "FuzzyDB", root_path %></li>				  
+				<li><%= link_to "fuzzydoDB", root_path %></li>				  
 				<li><%= link_to "Manual", manual_path %></li>
-				<li><%= link_to "Ordenamientos", ordering_path %> <span class="label label-warning">New</span> </li>			
-				<li><%= link_to "Constants", constants_path %> <span class="label label-warning">New</span> </li>
+				<li><%= link_to ordering_path do %>
+					Ordenamientos
+					<span class="label label-warning">New</span>
+					<% end %>
+				</li>
+				<li><%= link_to constants_path do %>
+					Constantes
+					<span class="label label-warning">New</span>
+					<% end %>
+				</li>
 			</ul>
 		</div>
 	</div>
