@@ -10,52 +10,46 @@
 	</p>
 	<div class="panel panel-default" style="margin-left: 25px; margin-right: 25px;">
 		<div class="panel-body">
-			<form class="form-inline" role="form">
+			<%= form_tag(queryBuilderOrdering_path, method:"get", multipart: true, :class => "form-inline") do %>
 				<p class="console">
-					SELECT 
-					<select class="form-control">
-						<option>id</option>
-						<option>value</option>
-						<option>id, value</option>						
-					</select>
+					SELECT codigo_pokedex_nacional, nombre, poder
+					<!-- < % = select_tag(:select , options_for_select({"Codigo Pokedex Nacional" => "codigo_pokedex_nacional", "codigo_pokedex_nacional" => "codigo_pokedex_nacional"}), { :class => "form-control"}) %> -->
 				</p>
 				<p class="console">
 					FROM pokemon 
 				</p> 
 				<p class="console">
 					ORDER BY poder 
-					<select class="form-control">
-						<option>ASC</option>
-						<option>DESC</option>
-					</select>
+					<%= select_tag(:order , options_for_select({"ASC" => "ASC", "DESC" => "DESC"}), { :class => "form-control"}) %>
 					USING
-					<select class="form-control">
-						<option>SUGENO</option>
-						<option>CHOQUET</option>
-						<option>CENTROID</option>
-					</select>
-					<button type="submit" class="btn btn-success">Ejecutar Query</button>
+					<%= select_tag(:using , options_for_select({"SUGENO" => "SUGENO", "CHOQUET" => "CHOQUET", "CENTROID" => "CENTROID"}), { :class => "form-control"}) %>
+
+					<%= submit_tag("Ejecutar Consulta", {:class => "btn btn-success"}) %>
 				</p>
-			</form>
+			<%end%>
+
 		</div>
 	</div>
 
-	<table class="table table-hover">                         
-		<h2> Resultados </h2>
-		<thead>		
-			<tr>                          
-				<th>id</th>
-				<th>value</th>
-			</tr>
-		</thead>
-		<tbody>				
-			<% @data.each do |row| %>
-			<tr>
-				<td><%= row.fetch("id") %></td>
-				<td><%= row.fetch("value_human_readable") %></td>
-			</tr>
-			<% end %> 
-		</tbody>		
-	</table>  
-
+	<% if flash[:dataQ] == 'complete' %>
+		<table class="table table-hover">                         
+			<h2> Resultados - Order By: <%= flash[:order] %> - Using: <%= flash[:using]%> </h2>
+			<thead>		
+				<tr>                          
+					<th>Codigo Pokedex</th>
+					<th>Nombre</th>
+					<th>Poder Base Estimado</th>
+				</tr>
+			</thead>
+			<tbody>				
+				<% @data.each do |row| %>
+				<tr>
+					<td><%= row.fetch("codigo_pokedex_nacional") %></td>
+					<td><%= row.fetch("nombre") %></td>
+					<td><%= row.fetch("poder_base_estimado") %></td>
+				</tr>
+				<% end %> 
+			</tbody>		
+		</table>  
+	<%end%>
 </div>

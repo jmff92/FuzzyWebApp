@@ -57,4 +57,8 @@ Rails.application.routes.draw do
   get 'manual' => 'statics#manual', :as => 'manual'
   get 'ordering' => 'orderings#orderings', :as => 'ordering'
   get 'constants' => 'constants#constants', :as => 'constants'
+  get 'queryBuilderOrdering' => 'orderings#queryBuilderOrdering', :as => 'queryBuilderOrdering'
+  post '/createByExt' , to: 'constants#createByExt'
+  post '/createByTrap' , to: 'constants#createByTrap'
+  get 'listarConst' => 'constants#listarConst', :as => 'listarConst'
 end

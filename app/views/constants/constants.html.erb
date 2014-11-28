@@ -18,7 +18,7 @@
 						</label>
 					</td>
 					<td style="padding: 15px 15px 15px 15px;" colspan="2">
-						<input type="text" class="form-control" style="width: 100%;">
+						<input class="form-control" id="name" name="name" style="width: 100%;" type="text">
 					</td>
 				</tr>
 				<tr>
@@ -45,16 +45,16 @@
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" class="form-control trapezoid-element" placeholder="x1" id="x1" onchange="changeTrapezoid(1)">
+									<input class="form-control trapezoid-element" id="x1" name="x1" onchange="changeTrapezoid(0)" placeholder="x1" type="text">
 								</td>
 								<td>
-									<input type="text" class="form-control trapezoid-element" placeholder="x2" id="x2" onchange="changeTrapezoid(2)">
+									<input class="form-control trapezoid-element" id="x2" name="x2" onchange="changeTrapezoid(1)" placeholder="x2" type="text">
 								</td>
 								<td>
-									<input type="text" class="form-control trapezoid-element" placeholder="x3" id="x3" onchange="changeTrapezoid(3)">
+									<input class="form-control trapezoid-element" id="x3" name="x3" onchange="changeTrapezoid(2)" placeholder="x3" type="text">
 								</td>
 								<td>
-									<input type="text" class="form-control trapezoid-element" placeholder="x4" id="x4" onchange="changeTrapezoid(4)">
+									<input class="form-control trapezoid-element" id="x4" name="x4" onchange="changeTrapezoid(3)" placeholder="x4" type="text">
 								</td>
 							</tr>
 						</tbody>
@@ -80,7 +80,7 @@
 
 			chart.draw(data, options);
 		}
-<% end -%>
+<% end %>
 		<div id="grafico-trapecio" style="margin-left: 200px; margin-right:200px;"></div>
 	</div>
 	<div id="by-extension" style="display: none;">
@@ -136,47 +136,46 @@
 
 			chart.draw(data, options);
 		}
-<% end -%>
+<% end %>
 		<div id="grafico-extension" style="margin-left: 200px; margin-right:200px;"></div>
 	</div>
 	<table style="margin:auto;">
 		<tbody>
 			<tr>
 				<td style="padding: 5px;">
-					<button type="button" class="btn btn-info">
+					
+					<button type="button" id='bt1' class="btn btn-info" onclick = sentByTrap()>
 						Crear constante
 					</button>
 				</td>
 				<td style="padding: 5px;">
-					<button type="button" class="btn btn-primary">
+					<!-- <button type="button" class="btn btn-primary">
 						Listar constantes
-					</button>
+					</button> -->
+					<%= button_to "Listar Constantes", {:controller => :constants, :action => :listarConst}, :class => "btn btn-primary", :method => :get %>
 				</td>
-				<td style="padding: 5px;">
-					<button type="button" class="btn btn-primary">
-						Ordenar constantes
-					</button>
-				</td>				
 			</tr>
 		</tbody>
 	</table>
 
-	<table class="table table-hover">                         
-		<thead>		
-			<tr>                          
-				<th>Nombre</th>
-				<th>Valor</th>
-			</tr>
-		</thead>
-		<tbody>				
-			<% @cons.each do |row| %>
-			<tr>
-				<td><%= row.fetch("constant_name") %></td>
-				<td><%= row.fetch("value") %></td>
-			</tr>
-			<% end %> 
-		</tbody>		
-	</table>  
+	<% if flash[:constantsQ] == 'complete' %>
+		<table class="table table-hover">                         
+			<thead>		
+				<tr>                          
+					<th>Nombre</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>				
+				<% @data.each do |row| %>
+				<tr>
+					<td><%= row.fetch("constant_name").sub!("-#{session[:ident]}","") %></td>
+					<td><%= row.fetch("value") %></td>
+				</tr>
+				<% end %> 
+			</tbody>		
+		</table>  
+	<%end%>
 
 
 
